@@ -95,7 +95,7 @@ def make_mobi(opf_dir, kindleGen_dir=None):
                 os.remove(cache_file)
         if os.path.isfile('cache/%s'%mobi_file_name) == True:
             print("Mobi文件生成成功！")
-            return True
+            return 'cache/%s'%mobi_file_name
         else:
             print("Mobi文件生成失败！")
             return False
@@ -110,5 +110,14 @@ def make_mobi(opf_dir, kindleGen_dir=None):
 #     make_ncx(book_name, chap_list)
 #     opf_dir = make_opf(bookInfo,chap_list)
 #
-#     make_mobi(opf_dir)
+#     book_dir = make_mobi(opf_dir)
+#
+#     from mail_push import mobi_push_by_qqmail
+#
+#     account = {
+#         'mail':'邮箱账号',
+#         'auth_code':'qq邮箱授权码'
+#     }
+#     receive_mail = 'kindle收件邮箱'
+#     mobi_push_by_qqmail(account,receive_mail,book_dir)
 #

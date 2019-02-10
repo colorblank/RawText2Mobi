@@ -22,7 +22,8 @@ def mobi_push(from_mail,to_mail,book_dir):
         print("邮件发送成功")
         return True
     except smtplib.SMTPException:
-        print("Error: 无法发送邮件")
+        print("Error: 发送邮件失败")
+        print('注意：请将发送邮箱添加至Kindle认可邮箱列表')
         return False
 
 def mobi_push_by_qqmail(from_account,to_mail,book_dir):
@@ -31,8 +32,8 @@ def mobi_push_by_qqmail(from_account,to_mail,book_dir):
     my_user = to_mail
 
     msg = MIMEMultipart()
-    msg['From'] = formataddr(["FromRunoob", my_sender])
-    msg['To'] = formataddr(["FK", my_user])
+    msg['From'] = formataddr(["Kindle推送服务", my_sender])
+    msg['To'] = formataddr(["Kindle", my_user])
     msg['Subject'] = "Convert"
 
 
@@ -50,4 +51,5 @@ def mobi_push_by_qqmail(from_account,to_mail,book_dir):
         return True
     except Exception:  # 如果 try 中的语句没有执行，则会执行下面的 ret=False
         print("Error:发送失败")
+        print('注意：请将发送邮箱添加至Kindle认可邮箱列表')
         return False
