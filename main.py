@@ -77,54 +77,34 @@ def make_opf(bookInfo, file_list):
 # 4. 调用kindlgen生成mobi
 # 命令行：/Applications/kindlegen /Users/me/Documents/Book/book.opf
 def make_mobi(opf_dir, sys=None):
+    kindleGen_dir = ''
     if sys == None:
         kindleGen_dir = 'tools/mac/kindlegen'
-        os.system('%s %s -locale zh'%(kindleGen_dir,opf_dir))
-        file_list = os.listdir("cache/")
-        print("正在清理缓存......")
-        mobi_file_name = ''
-        for file in file_list:
-            file_class = file.split('.')[-1]
-            if file_class == 'mobi':
-                mobi_file_name = file
-                continue
-            elif file_class == 'DS_Store':
-                continue
-            else:
-                cache_file =  os.path.join('cache/',file)
-                os.remove(cache_file)
-        if os.path.isfile('cache/%s'%mobi_file_name) == True:
-            print("Mobi文件生成成功！")
-            return 'cache/%s'%mobi_file_name
-        else:
-            print("Mobi文件生成失败！")
-            return False
-
     elif sys == 'linux':
         kindleGen_dir = 'tools/linux/kindlegen'
-        os.system('%s %s -locale zh'%(kindleGen_dir,opf_dir))
-        file_list = os.listdir("cache/")
-        print("正在清理缓存......")
-        mobi_file_name = ''
-        for file in file_list:
-            file_class = file.split('.')[-1]
-            if file_class == 'mobi':
-                mobi_file_name = file
-                continue
-            elif file_class == 'DS_Store':
-                continue
-            else:
-                cache_file =  os.path.join('cache/',file)
-                os.remove(cache_file)
-        if os.path.isfile('cache/%s'%mobi_file_name) == True:
-            print("Mobi文件生成成功！")
-            return 'cache/%s'%mobi_file_name
-        else:
-            print("Mobi文件生成失败！")
-            return False
-    elif sys == 'win':
+    else:
         pass
 
+    os.system('%s %s -locale zh'%(kindleGen_dir,opf_dir))
+    file_list = os.listdir("cache/")
+    print("正在清理缓存......")
+    mobi_file_name = ''
+    for file in file_list:
+        file_class = file.split('.')[-1]
+        if file_class == 'mobi':
+            mobi_file_name = file
+            continue
+        elif file_class == 'DS_Store':
+            continue
+        else:
+            cache_file =  os.path.join('cache/',file)
+            os.remove(cache_file)
+    if os.path.isfile('cache/%s'%mobi_file_name) == True:
+        print("Mobi文件生成成功！")
+        return 'cache/%s'%mobi_file_name
+    else:
+        print("Mobi文件生成失败！")
+        return False
 
 
 # if __name__ == '__main__':
