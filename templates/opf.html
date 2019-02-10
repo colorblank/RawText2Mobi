@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:title>{{ title }}</dc:title>
+    <dc:Creator>{{ author }}</dc:Creator>
+    <dc:description>{{ description }}</dc:description>
+    <dc:language>zh-cn</dc:language>
+</metadata>
+
+<manifest>
+      <!-- table of contents [mandatory] -->
+    <item id="ncx" media-type="application/x-dtbncx+xml" href="toc.ncx"/>
+    <item id="content" media-type="application/xhtml+xml" href="toc.html"/>
+{% for item in navigation %}
+    <item id="{{ item['id'] }}" media-type="application/xhtml+xml" href="{{ item['fileName'] }}"/>
+{% endfor %}
+</manifest>
+
+<spine toc="ncx">
+  <!-- the spine defines the linear reading order of the book -->
+
+    <itemref idref="content"/>
+  {% for item in navigation %}
+    <itemref idref="{{ item['id'] }}"/>
+  {% endfor %}
+</spine>
+
+<guide>
+    <reference type="toc" title="Table of Contents" href="toc.html"></reference>
+    <reference type="text" title="Welcome" href="toc.html"></reference>
+</guide>
+</package>

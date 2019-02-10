@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" 
+   "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+  </head>
+  <docTitle>
+    <text>{{ book_name }}</text>
+  </docTitle>
+<navMap>
+  <navPoint id="toc" playOrder="1">
+			<navLabel>
+				<text>
+					Table of Contents
+				</text>
+			</navLabel>
+			<content src="toc.html" />
+		</navPoint>
+  {% for chap in chapters %}
+    <navPoint id="chap{{  chap["id"] }}" playOrder={{ chap['id'] + 2 }}>
+      <navLabel>
+        <text>{{ chap["title"] }}</text>
+      </navLabel>
+      <content src="{{ chap["fileName"] }}" />
+    </navPoint>
+  {% endfor %}
+</navMap>
+</ncx>
